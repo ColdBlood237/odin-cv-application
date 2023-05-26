@@ -49,6 +49,7 @@ export default class App extends Component {
     this.handleEducationChange = this.handleEducationChange.bind(this);
     this.addExperience = this.addExperience.bind(this);
     this.addEducation = this.addEducation.bind(this);
+    this.deleteExperience = this.deleteExperience.bind(this);
   }
 
   handleChange() {
@@ -136,6 +137,15 @@ export default class App extends Component {
     });
   }
 
+  deleteExperience(id) {
+    const newExperiences = this.state.experiences.filter(
+      (exp) => exp.key !== id
+    );
+    this.setState({
+      experiences: newExperiences,
+    });
+  }
+
   render() {
     return (
       <>
@@ -147,6 +157,7 @@ export default class App extends Component {
             return (
               <Experience
                 handleExperienceChange={this.handleExperienceChange}
+                deleteExperience={this.deleteExperience}
                 id={experience.key}
                 key={experience.key}
               />

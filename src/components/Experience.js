@@ -5,11 +5,17 @@ export default class Experience extends Component {
     super();
 
     this.handleChange = this.handleChange.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   handleChange() {
     const { handleExperienceChange, id } = this.props;
     handleExperienceChange(id);
+  }
+
+  handleClick() {
+    const { deleteExperience, id } = this.props;
+    deleteExperience(id);
   }
 
   render() {
@@ -48,7 +54,9 @@ export default class Experience extends Component {
             placeholder="To"
           ></input>
         </form>
-        <button>Delete</button>
+        <button onClick={this.handleClick} id={id}>
+          Delete
+        </button>
       </div>
     );
   }

@@ -55,7 +55,7 @@ export default class Education extends Component {
             placeholder="To"
           ></input>
         </form>
-        <button>Delete</button>
+        <button id={id}>Delete</button>
       </div>
     );
   }
