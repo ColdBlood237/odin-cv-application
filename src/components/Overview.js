@@ -1,27 +1,32 @@
 import React, { Component } from "react";
 
 export default class Overview extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
   }
 
   render() {
+    const { generalInfo } = this.props;
+
     return (
       <div className="overview">
-        <div className="ov-header"></div>
+        <div className="ov-header">
+          <h2>
+            {generalInfo.fname} {generalInfo.lname}
+          </h2>
+          <p>{generalInfo.title}</p>
+        </div>
         <div className="ov-body">
-          <div className="ov-description">
-            <h4>Description</h4>
-            <hr></hr>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Vestibulum tempus imperdiet nisl sed vestibulum. Donec gravida,
-              nulla eget blandit fermentum, mauris nisi rutrum libero, ac
-              pharetra erat est sit amet tellus. Quisque fermentum dolor a
-              interdum fermentum. Maecenas vehicula ac ipsum nec gravida.
-              Integer quis porta turpis. Aenean et metus.
-            </p>
-          </div>
+          {generalInfo.description !== "" ? (
+            <div className="ov-description">
+              <h4>Description</h4>
+              <hr></hr>
+              <p>{generalInfo.description}</p>
+            </div>
+          ) : (
+            <></>
+          )}
+
           <div className="ov-experience">
             <h4>Experience</h4>
             <hr></hr>
@@ -44,14 +49,14 @@ export default class Overview extends Component {
           </div>
         </div>
         <div className="ov-sidebar">
-          <img src="https://picsum.photos/160"></img>
+          <img src={generalInfo.imgUrl}></img>
           <h4>Personal Details</h4>
           <h5>Address</h5>
-          <span>Example Street 10</span>
+          <span>{generalInfo.address}</span>
           <h5>Phone Number</h5>
-          <span>123456789</span>
+          <span>{generalInfo.phone}</span>
           <h5>Email</h5>
-          <span>john.doe@gmail.com</span>
+          <span>{generalInfo.email}</span>
         </div>
       </div>
     );

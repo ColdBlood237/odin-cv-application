@@ -1,23 +1,64 @@
 import React, { Component } from "react";
 
 export default class GeneralInfo extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
   }
 
   render() {
+    const { handleChange } = this.props;
+
     return (
       <div>
         <h3>Personal Information</h3>
         <form>
-          <input type="text" placeholder="First name"></input>
-          <input type="text" placeholder="Last name"></input>
-          <input type="text" placeholder="Title"></input>
-          <input type="file" accept="image/*" />
-          <input type="text" placeholder="Address"></input>
-          <input type="number" placeholder="Phone number"></input>
-          <input type="email" placeholder="Email"></input>
-          <textarea placeholder="Description"></textarea>
+          <input
+            onChange={handleChange}
+            type="text"
+            placeholder="First name"
+            id="fname"
+          ></input>
+          <input
+            onChange={handleChange}
+            type="text"
+            placeholder="Last name"
+            id="lname"
+          ></input>
+          <input
+            onChange={handleChange}
+            type="text"
+            placeholder="Title"
+            id="title"
+          ></input>
+          <input
+            onChange={handleChange}
+            type="text"
+            placeholder="Profile picture url"
+            id="img-url"
+          ></input>
+          <input
+            onChange={handleChange}
+            type="text"
+            placeholder="Address"
+            id="address"
+          ></input>
+          <input
+            onChange={handleChange}
+            type="number"
+            placeholder="Phone number"
+            id="phone"
+          ></input>
+          <input
+            onChange={handleChange}
+            type="email"
+            placeholder="Email"
+            id="email"
+          ></input>
+          <textarea
+            onChange={handleChange}
+            placeholder="Description"
+            id="description"
+          ></textarea>
         </form>
       </div>
     );

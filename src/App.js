@@ -8,6 +8,37 @@ import Overview from "./components/Overview";
 export default class App extends Component {
   constructor() {
     super();
+
+    this.state = {
+      generalInfo: {
+        fname: "",
+        lname: "",
+        title: "",
+        imgUrl: "https://picsum.photos/160",
+        address: "",
+        phone: "",
+        email: "",
+        description: "",
+      },
+      experiences: [],
+    };
+
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(e) {
+    this.setState({
+      generalInfo: {
+        fname: document.getElementById("fname").value,
+        lname: document.getElementById("lname").value,
+        title: document.getElementById("title").value,
+        imgUrl: document.getElementById("img-url").value,
+        address: document.getElementById("address").value,
+        phone: document.getElementById("phone").value,
+        email: document.getElementById("email").value,
+        description: document.getElementById("description").value,
+      },
+    });
   }
 
   render() {
@@ -15,7 +46,7 @@ export default class App extends Component {
       <>
         <Header />
         <div>
-          <GeneralInfo />
+          <GeneralInfo handleChange={this.handleChange} />
           <h3>Experience</h3>
           <Experience />
           <button>Add</button>
@@ -24,7 +55,7 @@ export default class App extends Component {
           <button>Add</button>
           <button>Reset</button>
         </div>
-        <Overview />
+        <Overview generalInfo={this.state.generalInfo} />
       </>
     );
   }
