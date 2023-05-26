@@ -51,6 +51,7 @@ export default class App extends Component {
     this.addEducation = this.addEducation.bind(this);
     this.deleteExperience = this.deleteExperience.bind(this);
     this.deleteEducation = this.deleteEducation.bind(this);
+    this.reset = this.reset.bind(this);
   }
 
   handleChange() {
@@ -154,6 +155,42 @@ export default class App extends Component {
     });
   }
 
+  reset() {
+    this.setState({
+      generalInfo: {
+        fname: "",
+        lname: "",
+        title: "",
+        imgUrl: "https://picsum.photos/160",
+        address: "",
+        phone: "",
+        email: "",
+        description: "",
+      },
+      experiences: [
+        {
+          position: "",
+          company: "",
+          city: "",
+          from: "",
+          to: "",
+          key: uniqid(),
+        },
+      ],
+      education: [
+        {
+          school: "",
+          city: "",
+          diploma: "",
+          subject: "",
+          from: "",
+          to: "",
+          key: uniqid(),
+        },
+      ],
+    });
+  }
+
   render() {
     return (
       <>
@@ -192,7 +229,7 @@ export default class App extends Component {
             Add
           </button>
 
-          <button>Reset</button>
+          <button onClick={this.reset}>Reset</button>
         </div>
         <Overview
           generalInfo={this.state.generalInfo}
