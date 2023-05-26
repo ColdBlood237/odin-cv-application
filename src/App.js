@@ -4,6 +4,7 @@ import GeneralInfo from "./components/GeneraInfo";
 import Experience from "./components/Experience";
 import Education from "./components/Education";
 import Overview from "./components/Overview";
+import uniqid from "uniqid";
 
 export default class App extends Component {
   constructor() {
@@ -20,10 +21,20 @@ export default class App extends Component {
         email: "",
         description: "",
       },
-      experiences: [],
+      experiences: [
+        {
+          position: "",
+          company: "",
+          city: "",
+          from: "",
+          to: "",
+          key: uniqid(),
+        },
+      ],
     };
 
     this.handleChange = this.handleChange.bind(this);
+    this.handleExperienceChange = this.handleExperienceChange.bind(this);
   }
 
   handleChange(e) {
@@ -41,6 +52,26 @@ export default class App extends Component {
     });
   }
 
+  handleExperienceChange(id) {
+    console.log(id);
+    const currentExpIndex = this.state.experiences.findIndex(
+      (exp) => exp.key == id
+    );
+    const updatedExperience = {
+      position: document.getElementById("position").value,
+      company: document.getElementById("company").value,
+      city: document.getElementById("city").value,
+      from: document.getElementById("exp-from").value,
+      to: document.getElementById("exp-to").value,
+      key: id,
+    };
+    const newExperiences = [...this.state.experiences];
+    newExperiences[currentExpIndex] = updatedExperience;
+    this.setState({
+      experiences: newExperiences,
+    });
+  }
+
   render() {
     return (
       <>
@@ -48,14 +79,20 @@ export default class App extends Component {
         <div>
           <GeneralInfo handleChange={this.handleChange} />
           <h3>Experience</h3>
-          <Experience />
+          <Experience
+            handleExperienceChange={this.handleExperienceChange}
+            id={this.state.experiences[0].key}
+          />
           <button>Add</button>
           <h3>Education</h3>
           <Education />
           <button>Add</button>
           <button>Reset</button>
         </div>
-        <Overview generalInfo={this.state.generalInfo} />
+        <Overview
+          generalInfo={this.state.generalInfo}
+          experiences={this.state.experiences}
+        />
       </>
     );
   }

@@ -6,7 +6,7 @@ export default class Overview extends Component {
   }
 
   render() {
-    const { generalInfo } = this.props;
+    const { generalInfo, experiences } = this.props;
 
     return (
       <div className="overview">
@@ -27,15 +27,29 @@ export default class Overview extends Component {
             <></>
           )}
 
-          <div className="ov-experience">
-            <h4>Experience</h4>
-            <hr></hr>
-            <span>2015 - Present</span>
-            <span>Senior Web Developer</span>
-            <span>Facebook Inc., Menlo Park</span>
-            <span>2012 - 2015</span>
-            <span>Junior Web Developer</span>
-            <span>Tesla Inc., Palo Alto</span>
+          {experiences.length !== 0 ? (
+            <div className="ov-experience">
+              <h4>Experience</h4>
+              <hr></hr>
+              {experiences.map((experience) => {
+                return (
+                  <div key={experience.key}>
+                    <span>
+                      {experience.from} - {experience.to}
+                    </span>
+                    <span>{experience.position}</span>
+                    <span>
+                      {experience.company}, {experience.city}
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+          ) : (
+            <></>
+          )}
+
+          <div className="ov-education">
             <h4>Education</h4>
             <hr></hr>
             <span>2008 - 2010</span>
