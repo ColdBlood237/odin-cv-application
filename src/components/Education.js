@@ -5,11 +5,17 @@ export default class Education extends Component {
     super();
 
     this.handleChange = this.handleChange.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   handleChange() {
     const { handleEducationChange, id } = this.props;
     handleEducationChange(id);
+  }
+
+  handleClick() {
+    const { deleteEducation, id } = this.props;
+    deleteEducation(id);
   }
 
   render() {
@@ -55,7 +61,9 @@ export default class Education extends Component {
             placeholder="To"
           ></input>
         </form>
-        <button id={id}>Delete</button>
+        <button onClick={this.handleClick} id={id}>
+          Delete
+        </button>
       </div>
     );
   }
