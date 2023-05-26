@@ -6,7 +6,7 @@ export default class Overview extends Component {
   }
 
   render() {
-    const { generalInfo, experiences } = this.props;
+    const { generalInfo, experiences, education } = this.props;
 
     return (
       <div className="overview">
@@ -49,18 +49,28 @@ export default class Overview extends Component {
             <></>
           )}
 
-          <div className="ov-education">
-            <h4>Education</h4>
-            <hr></hr>
-            <span>2008 - 2010</span>
-            <span>University of Technology, Oklahoma</span>
-            <span>Degree: Master</span>
-            <span>Subject: Science</span>
-            <span>2005 - 2008</span>
-            <span>University of Design Art, New York</span>
-            <span>Degree: Bachelor</span>
-            <span>Subject: Visual Art</span>
-          </div>
+          {education.length !== 0 ? (
+            <div className="ov-education">
+              <h4>Education</h4>
+              <hr></hr>
+              {education.map((edu) => {
+                return (
+                  <div key={edu.key}>
+                    <span>
+                      {edu.from} - {edu.to}
+                    </span>
+                    <span>
+                      {edu.school}, {edu.city}
+                    </span>
+                    <span>{edu.diploma}</span>
+                    <span>{edu.subject}</span>
+                  </div>
+                );
+              })}
+            </div>
+          ) : (
+            <></>
+          )}
         </div>
         <div className="ov-sidebar">
           <img src={generalInfo.imgUrl}></img>

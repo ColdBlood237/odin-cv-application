@@ -31,13 +31,25 @@ export default class App extends Component {
           key: uniqid(),
         },
       ],
+      education: [
+        {
+          school: "",
+          city: "",
+          diploma: "",
+          subject: "",
+          from: "",
+          to: "",
+          key: uniqid(),
+        },
+      ],
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleExperienceChange = this.handleExperienceChange.bind(this);
+    this.handleEducationChange = this.handleEducationChange.bind(this);
   }
 
-  handleChange(e) {
+  handleChange() {
     this.setState({
       generalInfo: {
         fname: document.getElementById("fname").value,
@@ -53,7 +65,6 @@ export default class App extends Component {
   }
 
   handleExperienceChange(id) {
-    console.log(id);
     const currentExpIndex = this.state.experiences.findIndex(
       (exp) => exp.key == id
     );
@@ -72,6 +83,26 @@ export default class App extends Component {
     });
   }
 
+  handleEducationChange(id) {
+    const currentEduIndex = this.state.education.findIndex(
+      (exp) => exp.key == id
+    );
+    const updatedEducation = {
+      school: document.getElementById("school").value,
+      city: document.getElementById("school-city").value,
+      diploma: document.getElementById("diploma").value,
+      subject: document.getElementById("subject").value,
+      from: document.getElementById("edu-from").value,
+      to: document.getElementById("edu-to").value,
+      key: id,
+    };
+    const newEducation = [...this.state.education];
+    newEducation[currentEduIndex] = updatedEducation;
+    this.setState({
+      education: newEducation,
+    });
+  }
+
   render() {
     return (
       <>
@@ -85,13 +116,17 @@ export default class App extends Component {
           />
           <button>Add</button>
           <h3>Education</h3>
-          <Education />
+          <Education
+            handleEducationChange={this.handleEducationChange}
+            id={this.state.education[0].key}
+          />
           <button>Add</button>
           <button>Reset</button>
         </div>
         <Overview
           generalInfo={this.state.generalInfo}
           experiences={this.state.experiences}
+          education={this.state.education}
         />
       </>
     );
