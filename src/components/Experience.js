@@ -13,37 +13,38 @@ export default class Experience extends Component {
   }
 
   render() {
+    const { id } = this.props;
     return (
       <div>
         <form>
           <input
             onChange={this.handleChange}
-            id="position"
+            id={"position-" + id}
             type="text"
             placeholder="Position"
           ></input>
           <input
             onChange={this.handleChange}
-            id="company"
+            id={"company-" + id}
             type="text"
             placeholder="Company"
           ></input>
           <input
             onChange={this.handleChange}
-            id="city"
+            id={"city-" + id}
             type="text"
             placeholder="City"
           ></input>
           <input
             onChange={this.handleChange}
-            id="exp-from"
+            id={"exp-from-" + id}
             type="text"
             placeholder="From"
           ></input>
           <input
             onChange={this.handleChange}
             type="text"
-            id="exp-to"
+            id={"exp-to-" + id}
             placeholder="To"
           ></input>
         </form>

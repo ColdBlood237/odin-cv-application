@@ -13,41 +13,43 @@ export default class Education extends Component {
   }
 
   render() {
+    const { id } = this.props;
+
     return (
       <div>
         <form>
           <input
-            id="school"
+            id={"school-" + id}
             onChange={this.handleChange}
             type="text"
             placeholder="School name"
           ></input>
           <input
-            id="school-city"
+            id={"school-city-" + id}
             onChange={this.handleChange}
             type="text"
             placeholder="City"
           ></input>
           <input
-            id="diploma"
+            id={"diploma-" + id}
             onChange={this.handleChange}
             type="text"
             placeholder="Diploma"
           ></input>
           <input
-            id="subject"
+            id={"subject-" + id}
             onChange={this.handleChange}
             type="text"
             placeholder="Subject"
           ></input>
           <input
-            id="edu-from"
+            id={"edu-from-" + id}
             onChange={this.handleChange}
             type="text"
             placeholder="From"
           ></input>
           <input
-            id="edu-to"
+            id={"edu-to-" + id}
             onChange={this.handleChange}
             type="text"
             placeholder="To"

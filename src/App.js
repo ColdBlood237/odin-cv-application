@@ -47,6 +47,8 @@ export default class App extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleExperienceChange = this.handleExperienceChange.bind(this);
     this.handleEducationChange = this.handleEducationChange.bind(this);
+    this.addExperience = this.addExperience.bind(this);
+    this.addEducation = this.addEducation.bind(this);
   }
 
   handleChange() {
@@ -69,11 +71,11 @@ export default class App extends Component {
       (exp) => exp.key == id
     );
     const updatedExperience = {
-      position: document.getElementById("position").value,
-      company: document.getElementById("company").value,
-      city: document.getElementById("city").value,
-      from: document.getElementById("exp-from").value,
-      to: document.getElementById("exp-to").value,
+      position: document.getElementById("position-" + id).value,
+      company: document.getElementById("company-" + id).value,
+      city: document.getElementById("city-" + id).value,
+      from: document.getElementById("exp-from-" + id).value,
+      to: document.getElementById("exp-to-" + id).value,
       key: id,
     };
     const newExperiences = [...this.state.experiences];
@@ -88,16 +90,47 @@ export default class App extends Component {
       (exp) => exp.key == id
     );
     const updatedEducation = {
-      school: document.getElementById("school").value,
-      city: document.getElementById("school-city").value,
-      diploma: document.getElementById("diploma").value,
-      subject: document.getElementById("subject").value,
-      from: document.getElementById("edu-from").value,
-      to: document.getElementById("edu-to").value,
+      school: document.getElementById("school-" + id).value,
+      city: document.getElementById("school-city-" + id).value,
+      diploma: document.getElementById("diploma-" + id).value,
+      subject: document.getElementById("subject-" + id).value,
+      from: document.getElementById("edu-from-" + id).value,
+      to: document.getElementById("edu-to-" + id).value,
       key: id,
     };
     const newEducation = [...this.state.education];
     newEducation[currentEduIndex] = updatedEducation;
+    this.setState({
+      education: newEducation,
+    });
+  }
+
+  addExperience() {
+    const newExperiences = this.state.experiences.slice();
+    newExperiences.push({
+      position: "",
+      company: "",
+      city: "",
+      from: "",
+      to: "",
+      key: uniqid(),
+    });
+    this.setState({
+      experiences: newExperiences,
+    });
+  }
+
+  addEducation() {
+    const newEducation = this.state.education.slice();
+    newEducation.push({
+      school: "",
+      city: "",
+      diploma: "",
+      subject: "",
+      from: "",
+      to: "",
+      key: uniqid(),
+    });
     this.setState({
       education: newEducation,
     });
@@ -110,17 +143,35 @@ export default class App extends Component {
         <div>
           <GeneralInfo handleChange={this.handleChange} />
           <h3>Experience</h3>
-          <Experience
-            handleExperienceChange={this.handleExperienceChange}
-            id={this.state.experiences[0].key}
-          />
-          <button>Add</button>
+          {this.state.experiences.map((experience) => {
+            return (
+              <Experience
+                handleExperienceChange={this.handleExperienceChange}
+                id={experience.key}
+                key={experience.key}
+              />
+            );
+          })}
+
+          <button onClick={this.addExperience} className="add-experience">
+            Add
+          </button>
+
           <h3>Education</h3>
-          <Education
-            handleEducationChange={this.handleEducationChange}
-            id={this.state.education[0].key}
-          />
-          <button>Add</button>
+          {this.state.education.map((edu) => {
+            return (
+              <Education
+                handleEducationChange={this.handleEducationChange}
+                id={edu.key}
+                key={edu.key}
+              />
+            );
+          })}
+
+          <button onClick={this.addEducation} className="add-education">
+            Add
+          </button>
+
           <button>Reset</button>
         </div>
         <Overview

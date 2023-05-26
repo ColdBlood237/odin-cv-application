@@ -72,8 +72,9 @@ export default class Overview extends Component {
             <></>
           )}
         </div>
+
         <div className="ov-sidebar">
-          <img src={generalInfo.imgUrl}></img>
+          <img src={generalInfo.imgUrl} alt="profile"></img>
           <h4>Personal Details</h4>
           <h5>Address</h5>
           <span>{generalInfo.address}</span>
