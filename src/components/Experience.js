@@ -12,8 +12,8 @@ export default class Experience extends Component {
           <input type="text" placeholder="Position"></input>
           <input type="text" placeholder="Company"></input>
           <input type="text" placeholder="City"></input>
-          <input type="date" placeholder="From"></input>
-          <input type="date" placeholder="To"></input>
+          <input type="text" placeholder="From"></input>
+          <input type="text" placeholder="To"></input>
         </form>
         <button>Delete</button>
       </div>

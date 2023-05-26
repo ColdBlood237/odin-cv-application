@@ -13,8 +13,8 @@ export default class Education extends Component {
           <input type="text" placeholder="City"></input>
           <input type="text" placeholder="Diploma"></input>
           <input type="text" placeholder="Subject"></input>
-          <input type="date" placeholder="From"></input>
-          <input type="date" placeholder="To"></input>
+          <input type="text" placeholder="From"></input>
+          <input type="text" placeholder="To"></input>
         </form>
         <button>Delete</button>
       </div>
