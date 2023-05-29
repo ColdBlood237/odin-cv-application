@@ -1,78 +1,55 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import Header from "./components/Header";
 import GeneralInfo from "./components/GeneraInfo";
 import Experience from "./components/Experience";
 import Education from "./components/Education";
 import Overview from "./components/Overview";
 import uniqid from "uniqid";
+import "./styles/styles.css";
 
-export default class App extends Component {
-  constructor() {
-    super();
+export default function App() {
+  const [generalInfo, setGeneralInfo] = useState({
+    fname: "",
+    lname: "",
+    title: "",
+    imgUrl: "https://picsum.photos/160",
+    address: "",
+    phone: "",
+    email: "",
+    description: "",
+  });
 
-    this.state = {
-      generalInfo: {
-        fname: "",
-        lname: "",
-        title: "",
-        imgUrl: "https://picsum.photos/160",
-        address: "",
-        phone: "",
-        email: "",
-        description: "",
-      },
-      experiences: [
-        {
-          position: "",
-          company: "",
-          city: "",
-          from: "",
-          to: "",
-          key: uniqid(),
-        },
-      ],
-      education: [
-        {
-          school: "",
-          city: "",
-          diploma: "",
-          subject: "",
-          from: "",
-          to: "",
-          key: uniqid(),
-        },
-      ],
-    };
+  const [experiences, setExperiences] = useState([
+    { position: "", company: "", city: "", from: "", to: "", key: uniqid() },
+  ]);
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleExperienceChange = this.handleExperienceChange.bind(this);
-    this.handleEducationChange = this.handleEducationChange.bind(this);
-    this.addExperience = this.addExperience.bind(this);
-    this.addEducation = this.addEducation.bind(this);
-    this.deleteExperience = this.deleteExperience.bind(this);
-    this.deleteEducation = this.deleteEducation.bind(this);
-    this.reset = this.reset.bind(this);
-  }
+  const [education, setEducation] = useState([
+    {
+      school: "",
+      city: "",
+      diploma: "",
+      subject: "",
+      from: "",
+      to: "",
+      key: uniqid(),
+    },
+  ]);
 
-  handleChange() {
-    this.setState({
-      generalInfo: {
-        fname: document.getElementById("fname").value,
-        lname: document.getElementById("lname").value,
-        title: document.getElementById("title").value,
-        imgUrl: document.getElementById("img-url").value,
-        address: document.getElementById("address").value,
-        phone: document.getElementById("phone").value,
-        email: document.getElementById("email").value,
-        description: document.getElementById("description").value,
-      },
+  function handleChange() {
+    setGeneralInfo({
+      fname: document.getElementById("fname").value,
+      lname: document.getElementById("lname").value,
+      title: document.getElementById("title").value,
+      imgUrl: document.getElementById("img-url").value,
+      address: document.getElementById("address").value,
+      phone: document.getElementById("phone").value,
+      email: document.getElementById("email").value,
+      description: document.getElementById("description").value,
     });
   }
 
-  handleExperienceChange(id) {
-    const currentExpIndex = this.state.experiences.findIndex(
-      (exp) => exp.key == id
-    );
+  function handleExperienceChange(id) {
+    const currentExpIndex = experiences.findIndex((exp) => exp.key == id);
     const updatedExperience = {
       position: document.getElementById("position-" + id).value,
       company: document.getElementById("company-" + id).value,
@@ -81,17 +58,13 @@ export default class App extends Component {
       to: document.getElementById("exp-to-" + id).value,
       key: id,
     };
-    const newExperiences = [...this.state.experiences];
+    const newExperiences = [experiences];
     newExperiences[currentExpIndex] = updatedExperience;
-    this.setState({
-      experiences: newExperiences,
-    });
+    setExperiences(newExperiences);
   }
 
-  handleEducationChange(id) {
-    const currentEduIndex = this.state.education.findIndex(
-      (exp) => exp.key == id
-    );
+  function handleEducationChange(id) {
+    const currentEduIndex = education.findIndex((exp) => exp.key == id);
     const updatedEducation = {
       school: document.getElementById("school-" + id).value,
       city: document.getElementById("school-city-" + id).value,
@@ -101,15 +74,13 @@ export default class App extends Component {
       to: document.getElementById("edu-to-" + id).value,
       key: id,
     };
-    const newEducation = [...this.state.education];
+    const newEducation = [education];
     newEducation[currentEduIndex] = updatedEducation;
-    this.setState({
-      education: newEducation,
-    });
+    setEducation(newEducation);
   }
 
-  addExperience() {
-    const newExperiences = this.state.experiences.slice();
+  function addExperience() {
+    const newExperiences = experiences.slice();
     newExperiences.push({
       position: "",
       company: "",
@@ -118,13 +89,11 @@ export default class App extends Component {
       to: "",
       key: uniqid(),
     });
-    this.setState({
-      experiences: newExperiences,
-    });
+    setExperiences(newExperiences);
   }
 
-  addEducation() {
-    const newEducation = this.state.education.slice();
+  function addEducation() {
+    const newEducation = education.slice();
     newEducation.push({
       school: "",
       city: "",
@@ -134,109 +103,92 @@ export default class App extends Component {
       to: "",
       key: uniqid(),
     });
-    this.setState({
-      education: newEducation,
-    });
+    setEducation(newEducation);
   }
 
-  deleteExperience(id) {
-    const newExperiences = this.state.experiences.filter(
-      (exp) => exp.key !== id
-    );
-    this.setState({
-      experiences: newExperiences,
-    });
+  function deleteExperience(id) {
+    const newExperiences = experiences.filter((exp) => exp.key !== id);
+    setExperiences(newExperiences);
   }
 
-  deleteEducation(id) {
-    const newEducation = this.state.education.filter((edu) => edu.key !== id);
-    this.setState({
-      education: newEducation,
-    });
+  function deleteEducation(id) {
+    const newEducation = education.filter((edu) => edu.key !== id);
+    setEducation(newEducation);
   }
 
-  reset() {
-    this.setState({
-      generalInfo: {
-        fname: "",
-        lname: "",
-        title: "",
-        imgUrl: "https://picsum.photos/160",
-        address: "",
-        phone: "",
-        email: "",
-        description: "",
+  function reset() {
+    setGeneralInfo({
+      fname: "",
+      lname: "",
+      title: "",
+      imgUrl: "https://picsum.photos/160",
+      address: "",
+      phone: "",
+      email: "",
+      description: "",
+    });
+
+    setExperiences([
+      { position: "", company: "", city: "", from: "", to: "", key: uniqid() },
+    ]);
+
+    setEducation([
+      {
+        school: "",
+        city: "",
+        diploma: "",
+        subject: "",
+        from: "",
+        to: "",
+        key: uniqid(),
       },
-      experiences: [
-        {
-          position: "",
-          company: "",
-          city: "",
-          from: "",
-          to: "",
-          key: uniqid(),
-        },
-      ],
-      education: [
-        {
-          school: "",
-          city: "",
-          diploma: "",
-          subject: "",
-          from: "",
-          to: "",
-          key: uniqid(),
-        },
-      ],
-    });
+    ]);
   }
 
-  render() {
-    return (
-      <>
-        <Header />
-        <div>
-          <GeneralInfo handleChange={this.handleChange} />
-          <h3>Experience</h3>
-          {this.state.experiences.map((experience) => {
-            return (
-              <Experience
-                handleExperienceChange={this.handleExperienceChange}
-                deleteExperience={this.deleteExperience}
-                id={experience.key}
-                key={experience.key}
-              />
-            );
-          })}
+  return (
+    <>
+      <Header />
+      <div>
+        <GeneralInfo handleChange={handleChange} />
+        <h3>Experience</h3>
+        {experiences.map((experience) => {
+          return (
+            <Experience
+              handleExperienceChange={handleExperienceChange}
+              deleteExperience={deleteExperience}
+              id={experience.key}
+              key={experience.key}
+            />
+          );
+        })}
 
-          <button onClick={this.addExperience} className="add-experience">
-            Add
-          </button>
+        <button onClick={addExperience} className="add-experience">
+          Add
+        </button>
 
-          <h3>Education</h3>
-          {this.state.education.map((edu) => {
-            return (
-              <Education
-                handleEducationChange={this.handleEducationChange}
-                deleteEducation={this.deleteEducation}
-                id={edu.key}
-                key={edu.key}
-              />
-            );
-          })}
+        <h3>Education</h3>
+        {education.map((edu) => {
+          return (
+            <Education
+              handleEducationChange={handleEducationChange}
+              deleteEducation={deleteEducation}
+              id={edu.key}
+              key={edu.key}
+            />
+          );
+        })}
 
-          <button onClick={this.addEducation} className="add-education">
-            Add
-          </button>
+        <button onClick={addEducation} className="add-education">
+          Add
+        </button>
 
-          <button onClick={this.reset}>Reset</button>
-        </div>
-        <Overview
-          generalInfo={this.state.generalInfo}
-          experiences={this.state.experiences}
-          education={this.state.education}
-        />
-      </>
-    );
-  }
+        <button onClick={reset}>Reset</button>
+      </div>
+      <Overview
+        generalInfo={generalInfo}
+        experiences={experiences}
+        education={education}
+      />
+    </>
+  );
 }
