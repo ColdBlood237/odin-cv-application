@@ -49,7 +49,7 @@ export default function App() {
   }
 
   function handleExperienceChange(id) {
-    const currentExpIndex = experiences.findIndex((exp) => exp.key == id);
+    const currentExpIndex = experiences.findIndex((exp) => exp.key === id);
     const updatedExperience = {
       position: document.getElementById("position-" + id).value,
       company: document.getElementById("company-" + id).value,
@@ -58,13 +58,13 @@ export default function App() {
       to: document.getElementById("exp-to-" + id).value,
       key: id,
     };
-    const newExperiences = [experiences];
+    const newExperiences = [...experiences];
     newExperiences[currentExpIndex] = updatedExperience;
     setExperiences(newExperiences);
   }
 
   function handleEducationChange(id) {
-    const currentEduIndex = education.findIndex((exp) => exp.key == id);
+    const currentEduIndex = education.findIndex((edu) => edu.key === id);
     const updatedEducation = {
       school: document.getElementById("school-" + id).value,
       city: document.getElementById("school-city-" + id).value,
@@ -74,36 +74,38 @@ export default function App() {
       to: document.getElementById("edu-to-" + id).value,
       key: id,
     };
-    const newEducation = [education];
+    const newEducation = [...education];
     newEducation[currentEduIndex] = updatedEducation;
     setEducation(newEducation);
   }
 
   function addExperience() {
-    const newExperiences = experiences.slice();
-    newExperiences.push({
-      position: "",
-      company: "",
-      city: "",
-      from: "",
-      to: "",
-      key: uniqid(),
-    });
-    setExperiences(newExperiences);
+    setExperiences([
+      ...experiences,
+      {
+        position: "",
+        company: "",
+        city: "",
+        from: "",
+        to: "",
+        key: uniqid(),
+      },
+    ]);
   }
 
   function addEducation() {
-    const newEducation = education.slice();
-    newEducation.push({
-      school: "",
-      city: "",
-      diploma: "",
-      subject: "",
-      from: "",
-      to: "",
-      key: uniqid(),
-    });
-    setEducation(newEducation);
+    setEducation([
+      ...education,
+      {
+        school: "",
+        city: "",
+        diploma: "",
+        subject: "",
+        from: "",
+        to: "",
+        key: uniqid(),
+      },
+    ]);
   }
 
   function deleteExperience(id) {
