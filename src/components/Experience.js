@@ -1,63 +1,54 @@
-import React, { Component } from "react";
+import React from "react";
 
-export default class Experience extends Component {
-  constructor() {
-    super();
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleClick = this.handleClick.bind(this);
-  }
-
-  handleChange() {
-    const { handleExperienceChange, id } = this.props;
+export default function Experience(props) {
+  function handleChange() {
+    const { handleExperienceChange, id } = props;
     handleExperienceChange(id);
   }
 
-  handleClick() {
-    const { deleteExperience, id } = this.props;
+  function handleClick() {
+    const { deleteExperience, id } = props;
     deleteExperience(id);
   }
 
-  render() {
-    const { id } = this.props;
-    return (
-      <div>
-        <form>
-          <input
-            onChange={this.handleChange}
-            id={"position-" + id}
-            type="text"
-            placeholder="Position"
-          ></input>
-          <input
-            onChange={this.handleChange}
-            id={"company-" + id}
-            type="text"
-            placeholder="Company"
-          ></input>
-          <input
-            onChange={this.handleChange}
-            id={"city-" + id}
-            type="text"
-            placeholder="City"
-          ></input>
-          <input
-            onChange={this.handleChange}
-            id={"exp-from-" + id}
-            type="text"
-            placeholder="From"
-          ></input>
-          <input
-            onChange={this.handleChange}
-            type="text"
-            id={"exp-to-" + id}
-            placeholder="To"
-          ></input>
-        </form>
-        <button onClick={this.handleClick} id={id}>
-          Delete
-        </button>
-      </div>
-    );
-  }
+  const { id } = props;
+  return (
+    <div>
+      <form>
+        <input
+          onChange={handleChange}
+          id={"position-" + id}
+          type="text"
+          placeholder="Position"
+        ></input>
+        <input
+          onChange={handleChange}
+          id={"company-" + id}
+          type="text"
+          placeholder="Company"
+        ></input>
+        <input
+          onChange={handleChange}
+          id={"city-" + id}
+          type="text"
+          placeholder="City"
+        ></input>
+        <input
+          onChange={handleChange}
+          id={"exp-from-" + id}
+          type="text"
+          placeholder="From"
+        ></input>
+        <input
+          onChange={handleChange}
+          type="text"
+          id={"exp-to-" + id}
+          placeholder="To"
+        ></input>
+      </form>
+      <button onClick={handleClick} id={id}>
+        Delete
+      </button>
+    </div>
+  );
 }
